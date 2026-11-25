@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5b1734">
+<title>Happy Birthday Felisa</title>
+<link rel="stylesheet" href="./style.css">
+
+<style>
+/* TIMELINE */
+.timeline {
+max-width: 700px;
+width: 100%;
+margin: 30px auto;
+text-align: left;
+}
+
+.timeline-item {
+background: rgba(255,255,255,.10);
+border: 1px solid rgba(255,182,205,.35);
+border-radius: 18px;
+padding: 22px;
+margin-bottom: 20px;
+}
+
+.timeline-item h2 {
+color: #f4b6cf;
+font-family: Georgia, serif;
+margin-bottom: 12px;
+}
+
+.timeline-item p {
+color: #f1d5e0;
+line-height: 1.8;
+}
+
+.timeline-icon {
+font-size: 30px;
+margin-bottom: 10px;
+}
+
+/* GALERI */
+.kelompok-foto {
+width: 100%;
+max-width: 900px;
+margin: 28px auto;
+}
+
+.judul-kelompok {
+color: #f4b6cf;
+margin: 25px 0 15px;
+font-family: Georgia, serif;
+}
+
+.galeri-foto {
+display: grid;
+grid-template-columns: repeat(3,minmax(0,1fr));
+gap: 16px;
+}
+
+.foto {
+overflow: hidden;
+border-radius: 16px;
+}
+
+.foto img {
+display: block;
+width: 100%;
+aspect-ratio: 1 / 1;
+object-fit: cover;
+cursor: pointer;
+}
+
+.foto p {
+padding: 10px 6px;
+}
+
+/* PEMUTAR MUSIK */
+.pemutar-musik {
+width: 100%;
+max-width: 520px;
+margin: 28px auto;
+padding: 24px;
+border: 1px solid rgba(255,182,205,.35);
+border-radius: 20px;
+background: rgba(255,255,255,.10);
+}
+
+.kontrol-musik {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
+flex-wrap: wrap;
+margin-top: 18px;
+}
+
+.kontrol-musik button {
+min-width: 48px;
+}
+
+.daftar-lagu {
+width: 100%;
+margin-top: 18px;
+padding: 12px;
+border-radius: 10px;
+}
+
+.catatan-musik {
+font-size: .9rem;
+line-height: 1.6;
+opacity: .9;
+margin-top: 14px;
+}
+
+/* PESAN TERAKHIR */
+.pesan-akhir {
+width: 100%;
+max-width: 700px;
+margin: 28px auto;
+padding: 28px;
+border: 1px solid rgba(255,182,205,.4);
+border-radius: 20px;
+background: rgba(255,255,255,.10);
+line-height: 1.9;
+opacity: 0;
+transform: translateY(25px);
+transition: opacity 1.5s ease,
+transform 1.5s ease;
+box-shadow: 0 10px 35px rgba(0,0,0,.18);
+}
+
+.pesan-akhir.muncul {
+opacity: 1;
+transform: translateY(0);
+}
+
+.pesan-akhir p {
+white-space: pre-line;
+color: #ffe5ef;
+font-family: Georgia, serif;
+font-size: 17px;
+line-height: 2;
+text-align: left;
+}
+
+.judul-pesan-akhir {
+color: #f4b6cf;
+font-family: Georgia, serif;
+margin-bottom: 20px;
+text-align: left;
+}
+
+.pesan-akhir .penutup {
+color: #f4b6cf;
+text-align: right;
+margin-top: 25px;
+font-style: italic;
+}
+
+/* PEMBESAR FOTO */
+.lightbox {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 1000;
+padding: 24px;
+background: rgba(20,5,13,.92);
+align-items: center;
+justify-content: center;
+}
+
+.lightbox.aktif {
+display: flex;
+}
+
+.lightbox img {
+max-width: min(900px,95vw);
+max-height: 85vh;
+object-fit: contain;
+border-radius: 12px;
+}
+
+.tutup-lightbox {
+position: absolute;
+top: 16px;
+right: 20px;
+font-size: 30px;
+color: white;
+background: transparent;
+border: 0;
+cursor: pointer;
+}
+
+@media (max-width:700px) {
+.galeri-foto {
+grid-template-columns: repeat(2,minmax(0,1fr));
+gap: 12px;
+}
+
+.pemutar-musik,
+.pesan-akhir {
+padding: 18px;
+}
+}
+
+@media (max-width:380px) {
+.galeri-foto {
+grid-template-columns: 1fr;
+}
+}
+
+/* BUNGA YANG BISA DIKLIK */
+.flower-item {
+display: inline-block;
+cursor: pointer;
+padding: 0 2px;
+transition: transform .2s ease;
+}
+
+.flower-item:hover,
+.flower-item:focus-visible {
+transform: translateY(-5px) scale(1.12);
+outline: none;
+}
+
+.pesan-bunga {
+min-height: 1.8em;
+margin: 16px auto;
+color: #f4b6cf;
+font-family: Georgia, serif;
+font-size: 1.05rem;
+line-height: 1.7;
+}
+</style>
+</head>
+
+<body>
+
+<div id="kelopak"></div>
+
+<!-- HALAMAN PIN -->
+<section class="container" id="halamanPIN">
+<div class="opening">
+<div class="icon">✿</div>
+<h1>Dear <span>Felisa</span></h1>
+
+<p>
+Ada kejutan kecil yang sudah disiapkan
+khusus untukmu. Masukkan PIN untuk membukanya.
+</p>
+
+<input
+type="password"
+id="pin"
+placeholder="DDMMYYYY"
+maxlength="8"
+inputmode="numeric"
+autocomplete="off"
+aria-label="Masukkan PIN"
+>
+
+<button type="button" onclick="bukaWebsite()">
+Open Your Surprise ♡
+</button>
+
+<p id="pesan" aria-live="polite"></p>
+</div>
+</section>
+
+<!-- HALAMAN ULANG TAHUN -->
+<section class="container hidden" id="halamanUtama">
+<div class="opening">
+<div class="icon">🌷</div>
+<h1>Happy Birthday <span>Felisa!</span></h1>
+
+<p>
+Selamat ulang tahun, Felisa Verninda Putri.
+Semoga hari ini penuh kebahagiaan,
+senyuman, dan kenangan indah.
+</p>
+
+<div class="cake">🎂</div>
+<p>Today is your special day ♡</p>
+
+<button type="button" onclick="bukaSurat()">
+Open My Letter ♡
+</button>
+</div>
+</section>
+
+<!-- HALAMAN SURAT -->
+<section class="container hidden" id="halamanSurat">
+<div class="opening surat">
+<div class="icon">💌</div>
+<h1>A Letter For <span>Felisa</span></h1>
+
+<div class="isi-surat">
+<p>Dear Felisa Verninda Putri,</p>
+
+<p>
+Selamat ulang tahun!
+Hari ini adalah hari spesial untuk seseorang
+yang pernah menjadi bagian dari banyak cerita.
+</p>
+
+<p>
+Terima kasih untuk setiap percakapan,
+tawa, cerita, dan kenangan yang pernah ada.
+Hal-hal sederhana itu akan tetap menjadi
+bagian dari cerita yang berharga.
+</p>
+
+<p>
+Semoga di umur yang baru ini,
+semua harapan baikmu bisa tercapai.
+Semoga kamu selalu diberi kebahagiaan,
+kesehatan, dan keberhasilan.
+</p>
+
+<p>
+Jangan pernah berhenti mengejar
+apa yang kamu impikan.
+Tetap jadi Felisa yang penuh semangat.
+</p>
+
+<p>With best wishes ♡</p>
+</div>
+
+<button type="button" onclick="bukaBouquet()">
+Open Your Bouquet ♡
+</button>
+</div>
+</section>
+
+<!-- HALAMAN BUKET -->
+<section class="container hidden" id="halamanBouquet">
+<div class="opening">
+<div class="icon">💐</div>
+<h1>A Bouquet For <span>Felisa</span></h1>
+
+<div class="bouquet">
+
+<div class="flowers">
+<span class="flower-item" role="button" tabindex="0"
+data-message="Semoga hari-harimu selalu dipenuhi kebahagiaan ♡"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌷</span>
+
+<span class="flower-item" role="button" tabindex="0"
+data-message="Semoga semua impian baikmu bisa tercapai 🌸"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌸</span>
+
+<span class="flower-item" role="button" tabindex="0"
+data-message="Jangan lupa tersenyum hari ini ya ♡"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌷</span>
+</div>
+
+<div class="flowers">
+<span class="flower-item" role="button" tabindex="0"
+data-message="Kamu pantas mendapatkan hal-hal baik 🌼"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌼</span>
+
+<span class="flower-item" role="button" tabindex="0"
+data-message="Semoga hari spesialmu penuh cerita indah 🌹"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌹</span>
+
+<span class="flower-item" role="button" tabindex="0"
+data-message="Semoga selalu ada alasan untuk bahagia 🌼"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌼</span>
+</div>
+
+<div class="flowers">
+<span class="flower-item" role="button" tabindex="0"
+data-message="Terima kasih untuk kenangan yang pernah ada 🌷"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌷</span>
+
+<span class="flower-item" role="button" tabindex="0"
+data-message="Semoga tahun ini membawa banyak hal baik 🌺"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌺</span>
+
+<span class="flower-item" role="button" tabindex="0"
+data-message="Selamat ulang tahun sekali lagi, Felisa ♡"
+onclick="tampilkanPesanBunga(this)"
+onkeydown="tekanBunga(event)">🌷</span>
+</div>
+
+<div class="stems">🌿 🌿 🌿</div>
+</div>
+
+<p class="pesan-bunga" id="pesanBunga" aria-live="polite"></p>
+
+<p>
+Bunga kecil untuk seseorang yang spesial.
+Semoga harimu selalu seindah bunga ini ♡
+</p>
+
+<button type="button" onclick="bukaGaleri()">
+Open Our Memories ♡
+</button>
+</div>
+</section>
+
+<!-- HALAMAN GALERI -->
+<section class="container hidden" id="halamanGaleri">
+<div class="opening galeri">
+<div class="icon">📸</div>
+<h1>Our Little <span>Memories</span></h1>
+<p>Beberapa kenangan yang akan selalu punya cerita ♡</p>
+
+<div class="kelompok-foto">
+<h2 class="judul-kelompok">My Side ♡</h2>
+
+<div class="galeri-foto">
+<div class="foto">
+<img src="./foto1.jpg" alt="Foto kamu 1" loading="lazy" onclick="lihatFoto(this)">
+<p>My Memory 1 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto2.jpg" alt="Foto kamu 2" loading="lazy" onclick="lihatFoto(this)">
+<p>My Memory 2 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto3.jpg" alt="Foto kamu 3" loading="lazy" onclick="lihatFoto(this)">
+<p>My Memory 3 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto4.jpg" alt="Foto kamu 4" loading="lazy" onclick="lihatFoto(this)">
+<p>My Memory 4 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto5.jpg" alt="Foto kamu 5" loading="lazy" onclick="lihatFoto(this)">
+<p>My Memory 5 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto6.jpg" alt="Foto kamu 6" loading="lazy" onclick="lihatFoto(this)">
+<p>My Memory 6 ♡</p>
+</div>
+</div>
+
+<h2 class="judul-kelompok">Her Side ♡</h2>
+
+<div class="galeri-foto">
+<div class="foto">
+<img src="./foto7.jpg" alt="Foto Felisa 1" loading="lazy" onclick="lihatFoto(this)">
+<p>Her Memory 1 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto8.jpg" alt="Foto Felisa 2" loading="lazy" onclick="lihatFoto(this)">
+<p>Her Memory 2 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto9.jpg" alt="Foto Felisa 3" loading="lazy" onclick="lihatFoto(this)">
+<p>Her Memory 3 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto10.jpg" alt="Foto Felisa 4" loading="lazy" onclick="lihatFoto(this)">
+<p>Her Memory 4 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto11.jpg" alt="Foto Felisa 5" loading="lazy" onclick="lihatFoto(this)">
+<p>Her Memory 5 ♡</p>
+</div>
+
+<div class="foto">
+<img src="./foto12.jpg" alt="Foto Felisa 6" loading="lazy" onclick="lihatFoto(this)">
+<p>Her Memory 6 ♡</p>
+</div>
+</div>
+</div>
+
+<button type="button" onclick="bukaTimeline()">
+Open Our Journey ♡
+</button>
+
+<button type="button" onclick="kembaliBouquet()">
+Back to Bouquet ♡
+</button>
+</div>
+</section>
+
+<!-- HALAMAN TIMELINE -->
+<section class="container hidden" id="halamanTimeline">
+<div class="opening">
+<div class="icon">📖</div>
+<h1>Our Little <span>Journey</span></h1>
+<p>Setiap momen punya cerita dan arti tersendiri ♡</p>
+
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-icon">🌷</div>
+<h2>A Little Beginning</h2>
+<p>
+Semua cerita indah selalu punya awal.
+Sebuah perkenalan sederhana yang menjadi
+bagian dari kenangan berharga.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-icon">🌸</div>
+<h2>Simple Moments</h2>
+<p>
+Percakapan kecil, cerita sederhana,
+dan tawa yang pernah menghiasi hari.
+Semua itu punya tempat tersendiri dalam ingatan.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-icon">💗</div>
+<h2>Memories to Keep</h2>
+<p>
+Tidak semua momen harus berlangsung selamanya
+untuk menjadi sesuatu yang berharga.
+Terima kasih untuk semua cerita yang pernah ada.
+</p>
+</div>
+</div>
+
+<button type="button" onclick="bukaPlaylist()">
+Listen to Our Songs ♡
+</button>
+
+<button type="button" onclick="kembaliGaleri()">
+Back to Memories ♡
+</button>
+</div>
+</section>
+
+<!-- HALAMAN PLAYLIST -->
+<section class="container hidden" id="halamanPlaylist">
+<div class="opening">
+<div class="icon">🎧</div>
+<h1>Our Little <span>Playlist</span></h1>
+<p>Tiga lagu untuk menemani halaman kecil ini ♡</p>
+
+<div class="pemutar-musik">
+<div class="icon">♫</div>
+<h2 id="judulLagu">Sisa Rasa</h2>
+<p id="nomorLagu">1 dari 3</p>
+
+<audio id="audioPlayer" preload="none"></audio>
+
+<div class="kontrol-musik">
+<button type="button" onclick="laguSebelumnya()" aria-label="Lagu sebelumnya">
+⏮
+</button>
+
+<button type="button" id="tombolPlay" onclick="toggleMusik()" aria-label="Putar atau jeda">
+▶
+</button>
+
+<button type="button" onclick="laguBerikutnya()" aria-label="Lagu berikutnya">
+⏭
+</button>
+</div>
+
+<select id="pilihLagu" class="daftar-lagu" onchange="pilihLaguDariDaftar(this.value)" aria-label="Pilih lagu">
+<option value="0">Sisa Rasa</option>
+<option value="1">End of the Road</option>
+<option value="2">Home</option>
+</select>
+
+<p class="catatan-musik">
+Musik akan mulai setelah PIN berhasil dimasukkan.
+Kalau browser belum mengizinkan pemutaran otomatis,
+tekan tombol play di atas ya.
+</p>
+</div>
+
+<button type="button" onclick="bukaPesanAkhir()">
+One Last Thing ♡
+</button>
+
+<button type="button" onclick="kembaliTimeline()">
+Back to Our Journey ♡
+</button>
+</div>
+</section>
+
+<!-- HALAMAN TERAKHIR -->
+<section class="container hidden" id="halamanPesanAkhir">
+<div class="opening">
+<div class="icon">💗</div>
+<h1>One Last <span>Message</span></h1>
+<p>A little message, written just for you ♡</p>
+
+<div class="pesan-akhir" id="kotakPesan">
+<h2 class="judul-pesan-akhir">
+Dear Felisa Verninda Putri,
+</h2>
+
+<div id="kataKataPribadi">
+<p>
+Aku nggak tahu apa kamu masih bisa kasih aku kesempatan atau nggak.
+Aku cuma mau minta maaf yaa, karena aku sudah membuat kamu kecewa.
+</p>
+
+<p>
+Kalau dipikir-pikir, jujur aku masih punya perasaan sama kamu.
+Aku masih sayang kamu. Tapi aku juga bingung harus gimana lagi,
+karena aku sadar mungkin selama ini aku belum bisa jadi cowok
+yang bisa membahagiakan kamu.
+</p>
+
+<p>
+Kenapa aku nggak pernah chat kamu lagi? Sebenarnya aku ragu dan takut.
+Aku takut kalau aku chat kamu, kamu malah nggak suka atau merasa terganggu.
+Jadi aku memilih diam, walaupun sebenarnya aku masih pengen ngobrol sama kamu.
+</p>
+
+<p>
+Aku juga berpikir mungkin yang terbaik sekarang adalah kalau kamu
+nggak perlu memikirkan aku lagi. Kalau kamu bahagia, aku juga ikut senang.
+Aku nggak mau kebahagiaan kamu terganggu karena aku.
+</p>
+
+<p>
+Maaf yaa, di hari bahagia kamu, aku malah ngomong seperti ini.
+Seharusnya hari ini aku cuma ingin membuat kamu tersenyum dan bahagia.
+</p>
+
+<p>
+Jujur, aku nggak tahu harus gimana lagi. Aku bingung.
+Satu minggu ini aku bahkan nggak ke mana-mana, karena aku fokus
+menyiapkan ini buat kamu. Aku pengen memberikan yang terbaik,
+karena aku masih ingat pernah janji kalau aku mau kasih kamu
+sesuatu yang paling bagus.
+</p>
+
+<p>
+Aku nggak tahu apakah kamu akan suka atau nggak,
+tapi aku benar-benar sudah berusaha semampu aku.
+</p>
+
+<p>
+Semoga kamu bahagia yaa, Felisa. Semoga semua yang kamu inginkan
+bisa tercapai. Maaf kalau aku belum bisa menjadi seseorang
+yang kamu harapkan.
+</p>
+
+<p>
+Selamat ulang tahun yaa. ❤️
+</p>
+
+<div class="pesan-penutup-pribadi">
+<p>
+Mungkin setelah ini aku nggak akan banyak bicara lagi.
+Tapi aku harap, suatu hari nanti, saat kamu melihat kembali
+website ini, kamu bisa ingat bahwa pernah ada seseorang
+yang berusaha membuat hari ulang tahun kamu terasa spesial.
+</p>
+
+<p class="tanda-tangan-pribadi">
+With love,<br>
+Ady ❤️
+</p>
+</div>
+</div>
+</div>
+
+<p>Thank you for being part of this story ♡</p>
+
+<button type="button" onclick="kembaliPlaylist()">
+Back to Playlist ♡
+</button>
+</div>
+</section>
+
+<!-- PEMBESAR FOTO -->
+<div class="lightbox" id="lightbox" onclick="tutupFoto(event)" aria-label="Tampilan foto besar">
+<button
+type="button"
+class="tutup-lightbox"
+onclick="tutupFoto(event)"
+aria-label="Tutup foto"
+>×</button>
+
+<img id="fotoBesar" src="" alt="Foto kenangan ukuran besar">
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+// DAFTAR SEMUA HALAMAN
+const daftarHalaman = [
+"halamanPIN",
+"halamanUtama",
+"halamanSurat",
+"halamanBouquet",
+"halamanGaleri",
+"halamanTimeline",
+"halamanPlaylist",
+"halamanPesanAkhir"
+];
+
+// PINDAH HALAMAN
+function pindahHalaman(halamanTujuan) {
+daftarHalaman.forEach(function(id) {
+document.getElementById(id).classList.add("hidden");
+});
+
+document.getElementById(halamanTujuan).classList.remove("hidden");
+
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
+}
+
+// MEMBUKA WEBSITE
+function bukaWebsite() {
+const pin = document.getElementById("pin").value.trim();
+const pesan = document.getElementById("pesan");
+
+if (pin === "27112007") {
+pesan.textContent = "";
+pindahHalaman("halamanUtama");
+putarMusik();
+} else {
+pesan.textContent = "PIN kamu salah, coba lagi ya ♡";
+}
+}
+
+// NAVIGASI
+function bukaSurat() {
+pindahHalaman("halamanSurat");
+}
+
+// FUNGSI KLIK BUNGA
+function tampilkanPesanBunga(bunga) {
+document.getElementById("pesanBunga").textContent = bunga.dataset.message;
+}
+
+function tekanBunga(event) {
+if (event.key === "Enter" || event.key === " ") {
+event.preventDefault();
+tampilkanPesanBunga(event.currentTarget);
+}
+}
+
+function bukaBouquet() {
+pindahHalaman("halamanBouquet");
+}
+
+function bukaGaleri() {
+pindahHalaman("halamanGaleri");
+}
+
+function kembaliBouquet() {
+pindahHalaman("halamanBouquet");
+}
+
+function bukaTimeline() {
+pindahHalaman("halamanTimeline");
+}
+
+function kembaliGaleri() {
+pindahHalaman("halamanGaleri");
+}
+
+function bukaPlaylist() {
+pindahHalaman("halamanPlaylist");
+}
+
+function kembaliTimeline() {
+pindahHalaman("halamanTimeline");
+}
+
+// HALAMAN PESAN TERAKHIR
+function bukaPesanAkhir() {
+pindahHalaman("halamanPesanAkhir");
+
+// Ganti ke lagu End of the Road
+muatLagu(1, true);
+
+// Animasi pesan
+const kotak = document.getElementById("kotakPesan");
+kotak.classList.remove("muncul");
+
+setTimeout(function() {
+kotak.classList.add("muncul");
+}, 100);
+}
+
+function kembaliPlaylist() {
+pindahHalaman("halamanPlaylist");
+}
+
+// DAFTAR LAGU
+const daftarLagu = [
+{
+judul: "Sisa Rasa",
+file: "./lagu1.mp3"
+},
+{
+judul: "End of the Road",
+file: "./lagu2.mp3"
+},
+{
+judul: "Home",
+file: "./lagu3.mp3"
+}
+];
+
+let indeksLagu = 0;
+const audioPlayer = document.getElementById("audioPlayer");
+
+// MEMUAT LAGU
+function muatLagu(indeks, mulaiOtomatis = false) {
+indeksLagu = (indeks + daftarLagu.length) % daftarLagu.length;
+
+audioPlayer.src = daftarLagu[indeksLagu].file;
+
+document.getElementById("judulLagu").textContent =
+daftarLagu[indeksLagu].judul;
+
+document.getElementById("nomorLagu").textContent =
+(indeksLagu + 1) + " dari " + daftarLagu.length;
+
+document.getElementById("pilihLagu").value =
+String(indeksLagu);
+
+document.getElementById("tombolPlay").textContent = "▶";
+
+if (mulaiOtomatis) {
+putarMusik();
+}
+}
+
+// MEMUTAR MUSIK
+function putarMusik() {
+if (!audioPlayer.src) {
+muatLagu(indeksLagu, false);
+}
+
+audioPlayer.play()
+.then(function() {
+document.getElementById("tombolPlay").textContent = "⏸";
+})
+.catch(function() {
+document.getElementById("tombolPlay").textContent = "▶";
+});
+}
+
+// PLAY DAN PAUSE
+function toggleMusik() {
+if (audioPlayer.paused) {
+putarMusik();
+} else {
+audioPlayer.pause();
+document.getElementById("tombolPlay").textContent = "▶";
+}
+}
+
+// LAGU BERIKUTNYA
+function laguBerikutnya() {
+muatLagu(indeksLagu + 1, true);
+}
+
+// LAGU SEBELUMNYA
+function laguSebelumnya() {
+muatLagu(indeksLagu - 1, true);
+}
+
+// PILIH LAGU
+function pilihLaguDariDaftar(nilai) {
+muatLagu(Number(nilai), true);
+}
+
+// OTOMATIS PINDAH LAGU JIKA SELESAI
+audioPlayer.addEventListener("ended", function() {
+laguBerikutnya();
+});
+
+// SIAPKAN LAGU PERTAMA
+muatLagu(0, false);
+
+// MEMPERBESAR FOTO
+function lihatFoto(gambar) {
+const lightbox = document.getElementById("lightbox");
+document.getElementById("fotoBesar").src = gambar.src;
+lightbox.classList.add("aktif");
+}
+
+// MENUTUP FOTO
+function tutupFoto(event) {
+if (
+event.target.id === "lightbox" ||
+event.target.classList.contains("tutup-lightbox")
+) {
+document.getElementById("lightbox").classList.remove("aktif");
+}
+}
+
+// ANIMASI KELOPAK BUNGA
+const areaKelopak = document.getElementById("kelopak");
+
+for (let i = 0; i < 30; i++) {
+const bunga = document.createElement("span");
+bunga.className = "petal";
+
+bunga.style.left = Math.random() * 100 + "%";
+
+bunga.style.animationDuration =
+(8 + Math.random() * 12) + "s";
+
+bunga.style.animationDelay =
+(-Math.random() * 15) + "s";
+
+areaKelopak.appendChild(bunga);
+}
+
+// PIN DENGAN ENTER
+document.getElementById("pin").addEventListener("keydown", function(event) {
+if (event.key === "Enter") {
+bukaWebsite();
+}
+});
+
+// TUTUP FOTO DENGAN ESCAPE
+document.addEventListener("keydown", function(event) {
+if (event.key === "Escape") {
+document.getElementById("lightbox").classList.remove("aktif");
+}
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: radial-gradient(circle at center, #48152f, #210713 75%);
+    color: #fff4ec;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* SEMUA HALAMAN */
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.opening {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* JUDUL DAN TEKS */
+.icon {
+    font-size: 65px;
+    color: #ffb6cc;
+    margin-bottom: 25px;
+    animation: bunga 3s ease-in-out infinite;
+}
+
+.opening h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 7vw, 65px);
+    margin-bottom: 22px;
+    color: #fff4ec;
+}
+
+.opening h1 span {
+    color: #f4b6cf;
+    font-style: italic;
+}
+
+.opening p {
+    color: #d9b6c6;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* INPUT PIN */
+.opening input {
+    padding: 16px;
+    width: 250px;
+    border: 1px solid #e9a5c2;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 8px;
+    background: #fff0f5;
+    color: #321020;
+    outline: none;
+}
+
+.opening input:focus {
+    border: 2px solid #f4b6cf;
+    box-shadow: 0 0 15px #f4b6cf55;
+}
+
+/* TOMBOL */
+.opening button {
+    display: block;
+    margin: 25px auto;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 35px;
+    background: #e9a5c2;
+    color: #321020;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.opening button:hover {
+    background: #ffffff;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 25px #e9a5c255;
+}
+
+/* ANIMASI BUNGA */
+@keyframes bunga {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(8deg);
+    }
+}
+
+/* KUE ULANG TAHUN */
+.cake {
+    font-size: 90px;
+    margin: 25px;
+    animation: bunga 3s ease-in-out infinite;
+}
+
+/* ANIMASI KELOPAK */
+#kelopak {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.petal {
+    position: absolute;
+    top: -30px;
+    width: 13px;
+    height: 19px;
+    background: linear-gradient(135deg, #ffc1d6, #d85b91);
+    border-radius: 80% 10% 80% 10%;
+    opacity: 0.8;
+    animation: jatuh linear infinite;
+}
+
+@keyframes jatuh {
+    0% {
+        transform: translateY(-30px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(650deg);
+    }
+}
+
+/* HALAMAN SURAT */
+.surat {
+    max-width: 750px;
+    padding: 35px;
+    background: rgba(255, 240, 245, 0.07);
+    border: 1px solid rgba(244, 182, 207, 0.3);
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.surat h1 {
+    font-size: clamp(35px, 7vw, 55px);
+}
+
+.isi-surat {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.isi-surat p {
+    color: #f1d5e1;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* BUKET BUNGA */
+.bouquet {
+    margin: 35px auto;
+    padding: 30px;
+    max-width: 400px;
+    background: rgba(255, 240, 245, 0.08);
+    border: 1px solid #e9a5c255;
+    border-radius: 25px;
+}
+
+/* BARIS BUNGA */
+.flowers {
+    font-size: 45px;
+    margin: 12px;
+    animation: bunga 3s ease-in-out infinite;
+}
+
+/* BUNGA YANG BISA DIKLIK */
+.flower-item {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* EFEK SAAT BUNGA DISENTUH */
+.flower-item:hover {
+    transform: scale(1.25) rotate(-8deg);
+    filter: drop-shadow(0 0 8px #ffb6cc);
+}
+
+/* EFEK SAAT BUNGA DITEKAN */
+.flower-item:active {
+    transform: scale(0.9);
+}
+
+/* EFEK FOKUS UNTUK KEYBOARD */
+.flower-item:focus {
+    outline: 2px solid #f4b6cf;
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
+/* TANGKAI BUNGA */
+.stems {
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+/* PESAN YANG MUNCUL SAAT BUNGA DIKLIK */
+.pesan-bunga {
+    min-height: 0;
+    max-width: 350px;
+    margin: 20px auto 0;
+    padding: 0 10px;
+    color: #ffe5ef;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* PESAN BUNGA MUNCUL */
+.pesan-bunga:not(:empty) {
+    opacity: 1;
+    transform: translateY(0);
+    min-height: 50px;
+}
+
+/* GALERI FOTO */
+.galeri {
+    max-width: 1050px;
+    width: 100%;
+}
+
+.galeri-foto {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 35px auto;
+    width: 100%;
+}
+
+.foto {
+    background: rgba(255, 240, 245, 0.10);
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid #e9a5c255;
+    transition: 0.3s ease;
+    overflow: hidden;
+}
+
+.foto:hover {
+    transform: translateY(-7px);
+    background: rgba(255, 240, 245, 0.16);
+    box-shadow: 0 10px 25px #00000033;
+}
+
+.foto img {
+    display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 13px;
+}
+
+.foto p {
+    font-size: 15px;
+    margin: 13px 0 3px;
+    color: #f1d5e1;
+}
+
+/* HALAMAN CERITA / TIMELINE */
+.cerita {
+    max-width: 750px;
+    width: 100%;
+    margin: auto;
+}
+
+.timeline {
+    margin: 35px auto;
+    text-align: left;
+    max-width: 600px;
+}
+
+.timeline-item {
+    padding: 22px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 182, 205, 0.3);
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.timeline-item h2 {
+    color: #f4b6cf;
+    margin-bottom: 10px;
+    font-family: Georgia, serif;
+}
+
+.timeline-item p {
+    color: #e8cbd8;
+    line-height: 1.7;
+}
+
+/* TAMPILAN HP */
+@media (max-width: 700px) {
+    .opening h1 {
+        font-size: 40px;
+    }
+
+    .opening p {
+        font-size: 15px;
+    }
+
+    .opening input {
+        width: 220px;
+    }
+
+    .galeri-foto {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .foto img {
+        height: 170px;
+    }
+
+    .surat {
+        padding: 22px;
+    }
+
+    .isi-surat p {
+        font-size: 15px;
+    }
+
+    /* BUKET BUNGA DI HP */
+    .bouquet {
+        padding: 20px 12px;
+    }
+
+    .flowers {
+        font-size: 38px;
+        margin: 10px 4px;
+    }
+
+    .stems {
+        font-size: 35px;
+    }
+
+    .pesan-bunga {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .galeri-foto {
+        grid-template-columns: 1fr;
+    }
+
+    .foto img {
+        height: 230px;
+    }
+
+    .flowers {
+        font-size: 34px;
+    }
+}
+
+/* KATA-KATA PRIBADI */
+#kataKataPribadi {
+    text-align: center;
+    line-height: 1.8;
+}
+
+#kataKataPribadi h2 {
+    margin-bottom: 25px;
+}
+
+#kataKataPribadi p {
+    margin-bottom: 20px;
+}
+
+/* HALAMAN PESAN TERAKHIR */
+.pesan-akhir {
+    width: 100%;
+    max-width: 700px;
+    margin: 28px auto;
+    padding: 28px;
+
+    border: 1px solid rgba(255, 182, 205, 0.4);
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    line-height: 1.9;
+
+    opacity: 0;
+    transform: translateY(25px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* ANIMASI PESAN MUNCUL */
+.pesan-akhir.muncul {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* JUDUL PESAN */
+.judul-pesan-akhir {
+    color: #f4b6cf;
+    font-family: Georgia, serif;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+/* ISI PESAN */
+#kataKataPribadi {
+    text-align: left;
+    line-height: 1.8;
+}
+
+#kataKataPribadi p {
+    color: #ffe5ef;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+/* KALIMAT PENUTUP */
+.pesan-penutup-pribadi {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 182, 205, 0.35);
+}
+
+.pesan-penutup-pribadi p {
+    color: #f4b6cf;
+    font-style: italic;
+    text-align: center;
+}
+
+/* TANDA TANGAN */
+.pesan-penutup-pribadi .tanda-tangan-pribadi {
+    margin-top: 30px;
+    margin-bottom: 5px;
+
+    color: #ffe5ef;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    line-height: 1.8;
+
+    text-align: right;
+}
+
+/* TAMPILAN HP */
+@media (max-width: 700px) {
+    .pesan-akhir {
+        padding: 18px;
+    }
+
+    #kataKataPribadi p {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    .pesan-penutup-pribadi .tanda-tangan-pribadi {
+        font-size: 18px;
+    }
+}
